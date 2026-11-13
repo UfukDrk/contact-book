@@ -1,5 +1,8 @@
 <script>
+import AppIcon from '../components/AppIcon.vue'
+
 export default {
+  components: { AppIcon },
   props: {
     contacts: { type: Array, required: true },
   },
@@ -31,42 +34,41 @@ export default {
 </script>
 
 <template>
-  <section>
+  <section aria-labelledby="contacts-heading">
     <div class="page-heading">
       <div>
-        <p class="eyebrow">A little more connected</p>
-        <h1>My contacts<span class="count-badge">{{ contacts.length }}</span></h1>
-        <p class="page-description">Good connections start with keeping in touch.</p>
+        <p class="eyebrow">Your workspace</p>
+        <h1 id="contacts-heading">Contacts</h1>
+        <p class="page-description">Everyone you need. All in one place.</p>
       </div>
-      <span class="heading-note">Your people. One place.</span>
+      <RouterLink class="button button-primary" to="/contacts/new"><AppIcon name="plus" /> Add contact</RouterLink>
     </div>
 
-    <div class="panel">
+    <div class="panel contacts-panel">
       <div class="list-toolbar">
         <div class="search-field">
           <label class="sr-only" for="contact-search">Search by first or last name</label>
-          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true">
-            <circle cx="10.5" cy="10.5" r="6.5" />
-            <path d="m16 16 4.5 4.5" />
-          </svg>
+          <AppIcon name="search" class="search-icon" />
           <input
             id="contact-search"
             ref="searchInput"
             v-model.trim="search"
             type="search"
-            placeholder="Search by first or last name…"
+            placeholder="Search contacts…"
             autocomplete="off"
+            aria-controls="contact-results"
           />
-          <button v-if="search" class="clear-search" type="button" aria-label="Clear search" @click="clearSearch">×</button>
+          <button v-if="search" class="clear-search" type="button" aria-label="Clear search" @click="clearSearch"><AppIcon name="close" /></button>
         </div>
-        <span class="sort-label">Sorted by last name <span aria-hidden="true">↓</span></span>
+        <span class="sort-label"><AppIcon name="sort" /> Last name <span class="sort-order">A–Z</span></span>
       </div>
 
-      <template v-if="filteredContacts.length">
-        <div class="list-labels" aria-hidden="true">
-          <span>Name</span><span>Email</span><span>Company</span><span></span>
-        </div>
-        <ul class="contact-list">
+      <div class="list-labels" aria-hidden="true">
+        <span>Name</span><span>Email address</span><span>Company</span><span></span>
+      </div>
+
+      <div id="contact-results">
+        <ul v-if="filteredContacts.length" class="contact-list">
           <li v-for="contact in filteredContacts" :key="contact.id">
             <RouterLink class="contact-row" :to="`/contacts/${contact.id}`">
               <span class="contact-person">
@@ -75,29 +77,36 @@ export default {
               </span>
               <span class="contact-email">{{ contact.email }}</span>
               <span class="contact-company">{{ contact.company || '—' }}</span>
-              <span class="row-arrow" aria-hidden="true">↗</span>
+              <AppIcon name="chevronRight" class="row-arrow" />
             </RouterLink>
           </li>
         </ul>
-      </template>
 
-      <div v-else-if="search" class="empty-state">
-        <span class="empty-symbol" aria-hidden="true">?</span>
-        <h2>No matching contacts</h2>
-        <p>Try another first or last name.</p>
-        <button class="button button-secondary" type="button" @click="clearSearch">Clear search</button>
-      </div>
+        <div v-else-if="search" class="empty-state">
+          <span class="empty-symbol" aria-hidden="true"><AppIcon name="search" /></span>
+          <h2>No contacts found</h2>
+          <p>Try a different first or last name, or clear your search to see everyone.</p>
+          <button class="button button-secondary" type="button" @click="clearSearch">Clear search</button>
+        </div>
 
-      <div v-else class="empty-state">
-        <span class="empty-symbol" aria-hidden="true">+</span>
-        <h2>A place for your people.</h2>
-        <p>Add your first contact and keep the details that matter close by.</p>
-        <RouterLink class="button button-primary" to="/contacts/new">Add your first contact</RouterLink>
+        <div v-else class="empty-state empty-state-welcome">
+          <div class="empty-illustration" aria-hidden="true">
+            <div class="illustration-card illustration-card-back"></div>
+            <div class="illustration-card illustration-card-front">
+              <span class="illustration-avatar"><AppIcon name="contacts" /></span>
+              <span class="illustration-lines"><span></span><span></span></span>
+              <span class="illustration-plus"><AppIcon name="plus" /></span>
+            </div>
+          </div>
+          <h2>Your network starts here.</h2>
+          <p>A simple home for the people in your life.<br />Add a contact to get started.</p>
+          <RouterLink class="button button-primary" to="/contacts/new"><AppIcon name="plus" /> Add your first contact</RouterLink>
+        </div>
       </div>
 
       <div class="list-footer" role="status">
-        <span>{{ filteredContacts.length }} {{ filteredContacts.length === 1 ? 'contact' : 'contacts' }}{{ search ? ` found out of ${contacts.length}` : ' in your book' }}</span>
-        <span>Made for keeping in touch</span>
+        <span><span class="numeric">{{ filteredContacts.length }}</span> {{ filteredContacts.length === 1 ? 'contact' : 'contacts' }}{{ search ? ` of ${contacts.length}` : ' in your workspace' }}</span>
+        <span>Sorted alphabetically</span>
       </div>
     </div>
   </section>

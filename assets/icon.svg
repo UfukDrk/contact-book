@@ -1,4 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="14" fill="#9333ea"/>
-  <text x="32" y="32" dy="0.35em" text-anchor="middle" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif" font-size="26" font-weight="600" fill="#ffffff">CB</text>
+  <rect width="64" height="64" rx="12" fill="#171717"/>
+  <g fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="18" y="14" width="31" height="36" rx="4"/>
+    <path d="M24 14v36M14 23h8M14 32h8M14 41h8"/>
+    <circle cx="36" cy="28" r="4"/>
+    <path d="M30 41v-2a6 6 0 0 1 12 0v2"/>
+  </g>
 </svg>

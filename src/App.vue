@@ -1,5 +1,8 @@
 <script>
+import AppIcon from './components/AppIcon.vue'
+
 export default {
+  components: { AppIcon },
   data() {
     return {
       contacts: [],
@@ -76,16 +79,29 @@ export default {
   <a class="skip-link" href="#main-content">Skip to content</a>
   <header class="site-header">
     <div class="header-content">
-      <RouterLink class="brand" to="/" aria-label="Contact Book home">
-        <img src="../assets/icon.svg" width="38" height="38" alt="" />
-        <span>Contact<span class="brand-light">Book</span></span>
-      </RouterLink>
+      <div class="workspace-identity">
+        <RouterLink class="brand" to="/" aria-label="Contact Book home">
+          <img src="../assets/icon.svg" width="30" height="30" alt="" />
+          <span>Contact Book</span>
+        </RouterLink>
+        <span class="workspace-divider" aria-hidden="true">/</span>
+        <span class="workspace-name">Personal workspace</span>
+        <span class="workspace-badge">Personal</span>
+      </div>
+      <span class="storage-status" :class="{ 'storage-status-warning': storageError }">
+        <span class="status-dot" aria-hidden="true"></span>
+        {{ storageError ? 'Storage unavailable' : 'On this device' }}
+      </span>
+    </div>
+    <div class="navigation-content">
       <nav class="main-nav" aria-label="Main navigation">
-        <RouterLink class="nav-link" to="/">All contacts</RouterLink>
-        <RouterLink class="button button-primary" to="/contacts/new">
-          <span aria-hidden="true">+</span> Add contact
+        <RouterLink class="nav-link" :class="{ 'is-active': $route.name !== 'not-found' }" to="/">
+          <AppIcon name="contacts" />
+          Contacts
+          <span class="nav-count">{{ contacts.length }}</span>
         </RouterLink>
       </nav>
+      <span class="navigation-note">A little more connected.</span>
     </div>
   </header>
 
@@ -101,7 +117,11 @@ export default {
   </main>
 
   <footer class="site-footer">
-    <span>MTM6407 · Web Development IV</span>
-    <span>Your contacts stay in this browser.</span>
+    <div class="footer-brand">
+      <img src="../assets/icon.svg" width="20" height="20" alt="" />
+      <span>Contact Book</span>
+      <span class="footer-course">MTM6407 · Web Development IV</span>
+    </div>
+    <span class="footer-privacy"><AppIcon name="lock" /> Stored in this browser. Just for you.</span>
   </footer>
 </template>

@@ -1,5 +1,8 @@
 <script>
+import AppIcon from '../components/AppIcon.vue'
+
 export default {
+  components: { AppIcon },
   props: {
     contacts: { type: Array, required: true },
   },
@@ -31,7 +34,7 @@ export default {
 
 <template>
   <section class="narrow-page">
-    <RouterLink class="back-link" to="/"><span aria-hidden="true">←</span> All contacts</RouterLink>
+    <RouterLink class="back-link" to="/"><AppIcon name="arrowLeft" /> All contacts</RouterLink>
 
     <template v-if="contact">
       <div class="panel detail-card">
@@ -42,7 +45,7 @@ export default {
             <h1>{{ contact.firstName }} {{ contact.lastName }}</h1>
             <p class="page-description">{{ contact.company || 'Personal contact' }}</p>
           </div>
-          <RouterLink class="button button-secondary" :to="`/contacts/${contact.id}/edit`">Edit contact</RouterLink>
+          <RouterLink class="button button-secondary" :to="`/contacts/${contact.id}/edit`"><AppIcon name="edit" /> Edit contact</RouterLink>
         </div>
 
         <div class="details-content">
@@ -60,8 +63,11 @@ export default {
 
         <div class="delete-section">
           <template v-if="!confirmingDelete">
-            <p>No longer need this contact?</p>
-            <button ref="deleteButton" class="button button-danger-outline" type="button" @click="showDeleteConfirmation">Delete contact</button>
+            <div>
+              <h2>Delete contact</h2>
+              <p>Permanently remove this person from your contacts.</p>
+            </div>
+            <button ref="deleteButton" class="button button-danger-outline" type="button" @click="showDeleteConfirmation"><AppIcon name="trash" /> Delete contact</button>
           </template>
           <div v-else class="delete-confirmation">
             <p role="alert">Delete <strong>{{ contact.firstName }} {{ contact.lastName }}</strong>? This cannot be undone.</p>

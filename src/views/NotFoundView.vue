@@ -1,8 +1,8 @@
 <template>
   <section class="empty-state panel">
-    <p class="eyebrow">Page not found</p>
-    <h1>Let's get you back.</h1>
-    <p>This address does not lead to a page in your contact book.</p>
+    <p class="eyebrow">404 / Page not found</p>
+    <h1>This page doesn't exist.</h1>
+    <p>Check the address or head back to your contacts.</p>
     <RouterLink class="button button-primary" to="/">Back to contacts</RouterLink>
   </section>
 </template>

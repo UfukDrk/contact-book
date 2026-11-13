@@ -5,6 +5,11 @@
 A personal address book for **MTM6407 — Web Development IV** at Algonquin College.
 Built with Vue 3, Vue Router 4, Vite, JavaScript, and plain CSS.
 
+The interface uses a Vercel-inspired visual system: neutral surfaces, subtle
+borders, black primary actions, and locally bundled Geist and Geist Mono fonts.
+The contact directory, forms, and detail pages share responsive layouts and
+accessible focus states. Icons are inline SVGs; no icon library is required.
+
 ## Features
 
 - Contacts sorted alphabetically by last name, then first name.
@@ -60,6 +65,7 @@ Live deployment is not required for this assignment. If deployed later,
 | `src/views/ContactDetailView.vue` | Display all contact fields and confirm deletion. |
 | `src/views/ContactFormView.vue` | Choose add/edit mode and pass form events to the app. |
 | `src/components/ContactForm.vue` | Share the form fields and validation between add and edit. |
+| `src/components/AppIcon.vue` | Provide the shared SVG icons used throughout the interface. |
 | `src/views/NotFoundView.vue` | Show a helpful message for an unknown URL. |
 | `src/style.css` | Style the application and adapt it to smaller screens. |
 

@@ -1,8 +1,9 @@
 <script>
 import ContactForm from '../components/ContactForm.vue'
+import AppIcon from '../components/AppIcon.vue'
 
 export default {
-  components: { ContactForm },
+  components: { ContactForm, AppIcon },
   props: {
     contacts: { type: Array, required: true },
   },
@@ -32,14 +33,14 @@ export default {
 
 <template>
   <section class="narrow-page">
-    <RouterLink class="back-link" :to="cancelTo"><span aria-hidden="true">←</span> {{ isEditing && contact ? 'Back to contact' : 'All contacts' }}</RouterLink>
+    <RouterLink class="back-link" :to="cancelTo"><AppIcon name="arrowLeft" /> {{ isEditing && contact ? 'Back to contact' : 'All contacts' }}</RouterLink>
 
     <template v-if="!isEditing || contact">
       <div class="page-heading">
         <div>
-          <p class="eyebrow">{{ isEditing ? 'Keep things up to date' : 'Make a new connection' }}</p>
-          <h1>{{ isEditing ? 'Edit contact' : 'Add a contact' }}</h1>
-          <p class="page-description">{{ isEditing ? 'Update their details so you can always stay in touch.' : 'Start with a name. Keep the rest close by.' }}</p>
+          <p class="eyebrow">{{ isEditing ? 'Contact settings' : 'Grow your network' }}</p>
+          <h1>{{ isEditing ? 'Edit contact' : 'New contact' }}</h1>
+          <p class="page-description">{{ isEditing ? 'Keep their information up to date.' : 'Add someone new to your personal address book.' }}</p>
         </div>
       </div>
       <ContactForm :contact="isEditing ? contact : null" :cancel-to="cancelTo" @save-contact="saveContact" />
