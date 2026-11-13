@@ -88,11 +88,9 @@ left intact and a warning is shown. A failed save also displays a warning.
 | `/contacts/:id/edit` | Edit that same contact |
 
 The `:id` route parameter identifies the person required by the detail/edit
-requirements. Each new contact receives a unique ID using `crypto.randomUUID()`.
+requirements.Each new contact receives the next available numeric ID from the current contact list.
 `this.$router.push()` opens the saved person's detail page after adding or
-editing, and the list after deleting. These techniques support the assignment's
-required navigation; their inclusion does not assume they appeared in the
-instructor's examples.
+editing, and the list after deleting.
 
 Router reference: [Vue Router guide](https://router.vuejs.org/guide/).
 
@@ -113,7 +111,6 @@ Checked in the browser using temporary fictional contacts:
 - Missing contacts and unknown pages show helpful navigation.
 - Keyboard tab order, visible focus, and labelled inputs.
 - Desktop layout at 1366px and mobile layouts at 390px and 320px.
-- Unreadable saved JSON shows a warning without overwriting the saved value.
 - `npm run build` succeeds; no application errors were observed in the browser console.
 
 ## Submission
